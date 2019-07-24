@@ -5,7 +5,8 @@ The JCC Basic standard library - a part of [JCC](https://github.com/dykstrom/jcc
 
 ## Using
 
-The standard library is not usable on its own. It is distributed with JCC.
+The standard library is not usable on its own. It is distributed with JCC as
+jccbasic.dll.
 
 
 ## Building
