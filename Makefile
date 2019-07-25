@@ -1,8 +1,9 @@
 # -----------------------------------------------------------------------------
 
-INC=src/inc/c
-SRC=src/main/c
-TEST=src/test/c
+MAIN_INC=main/inc
+MAIN_SRC=main/src
+TEST_INC=test/inc
+TEST_SRC=test/src
 
 DLL_NAME=jccbasic
 
@@ -10,7 +11,7 @@ DLL_DIR=target_dll
 EXE_DIR=target_exe
 
 CC=gcc
-CC_FLAGS=-I$(INC) -g -Wall
+CC_FLAGS=-c -g -Wall
 
 LD=gcc
 LD_MAKE_FLAGS=-shared --enable-runtime-pseudo-reloc
@@ -19,9 +20,9 @@ LD_LINK_FLAGS=-L$(DLL_DIR) -l$(DLL_NAME)
 # -----------------------------------------------------------------------------
 
 DEPS=\
-	$(INC)/fix.h \
-	$(INC)/jccbasic_version.h \
-	$(INC)/sgn.h
+	$(MAIN_INC)/fix.h \
+	$(MAIN_INC)/jccbasic_version.h \
+	$(MAIN_INC)/sgn.h
 
 DLL_OBJS=\
 	$(DLL_DIR)/fix.o \
@@ -44,7 +45,7 @@ EXE=\
 
 .PHONY: all clean
 
-all: $(DLL_DIR) $(DLL) $(EXE_DIR) $(EXE)
+all: $(DLL_DIR) $(EXE_DIR) $(DLL) $(EXE)
 
 clean:
 	-rm -rf $(DLL_DIR) $(EXE_DIR)
@@ -54,21 +55,21 @@ clean:
 $(DLL_DIR):
 	-mkdir $(DLL_DIR)
 
-$(DLL_DIR)/%.o: $(SRC)/%.c $(DEPS)
-	$(CC) $(CC_FLAGS) -c -o $@ $<
+$(DLL_DIR)/%.o: $(MAIN_SRC)/%.c $(DEPS)
+	$(CC) -o $@ $(CC_FLAGS) -I$(MAIN_INC) $<
 
 $(DLL): $(DLL_OBJS)
-	$(LD) $(LD_MAKE_FLAGS) -o $@ $^
+	$(LD) -o $@ $(LD_MAKE_FLAGS) $^
 
 # -----------------------------------------------------------------------------
 
 $(EXE_DIR):
 	-mkdir $(EXE_DIR)
 
-$(EXE_DIR)/%.o: $(TEST)/%.c $(DEPS)
-	$(CC) $(CC_FLAGS) -c -o $@ $<
+$(EXE_DIR)/%.o: $(TEST_SRC)/%.c $(DEPS)
+	$(CC) -o $@ $(CC_FLAGS) -I$(MAIN_INC) -I$(TEST_INC) $<
 
 $(EXE_DIR)/%.exe: $(EXE_DIR)/%.o
-	$(LD) $(LD_LINK_FLAGS) -o $@ $<
+	$(LD) -o $@ $(LD_LINK_FLAGS) $<
 
 # -----------------------------------------------------------------------------

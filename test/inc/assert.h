@@ -1,8 +1,12 @@
+#ifndef ASSERT_H_
+#define ASSERT_H_
+
 #include <inttypes.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 
-#include "sgn.h"
+// These functions should be macros...
 
 void assert_equals(int64_t expected, int64_t actual) {
   if (expected == actual) {
@@ -12,10 +16,12 @@ void assert_equals(int64_t expected, int64_t actual) {
   }
 }
 
-int main(int argc, char *argv[]) {
-  assert_equals(0, sgn(0));
-  assert_equals(1, sgn(1));
-  assert_equals(1, sgn(4711.0));
-  assert_equals(-1, sgn(-1));
-  assert_equals(-1, sgn(-3.14));
+void assert_true(bool actual) {
+  if (actual) {
+    printf("OK\n");
+  } else {
+    printf("FAIL: expected: %d, but was: %d", true, actual);
+  }
 }
+
+#endif /* ASSERT_H_ */
