@@ -5,10 +5,10 @@ MAIN_SRC=main/src
 TEST_INC=test/inc
 TEST_SRC=test/src
 
-TARGET=target
+BIN=bin
 
 DLL_NAME=jccbasic
-DLL=$(TARGET)/$(DLL_NAME).dll
+DLL=$(BIN)/$(DLL_NAME).dll
 
 CC=gcc
 CC_FLAGS_MAIN=-c -g -Wall -I$(MAIN_INC)
@@ -16,7 +16,7 @@ CC_FLAGS_TEST=-c -g -Wall -I$(MAIN_INC) -I$(TEST_INC)
 
 LD=gcc
 LD_FLAGS_MAKE=-shared --enable-runtime-pseudo-reloc
-LD_FLAGS_LINK=-L$(TARGET) -l$(DLL_NAME)
+LD_FLAGS_LINK=-L$(BIN) -l$(DLL_NAME)
 
 # -----------------------------------------------------------------------------
 
@@ -30,41 +30,41 @@ HEADERS=\
 	$(TEST_INC)/assert.h
 
 MAIN_OBJS=\
-	$(TARGET)/fix.o \
-	$(TARGET)/jccbasic_version.o \
-	$(TARGET)/ltrim.o \
-	$(TARGET)/rtrim.o \
-	$(TARGET)/sgn.o
+	$(BIN)/fix.o \
+	$(BIN)/jccbasic_version.o \
+	$(BIN)/ltrim.o \
+	$(BIN)/rtrim.o \
+	$(BIN)/sgn.o
 
 TEST_OBJS=\
-	$(TARGET)/test_fix.o \
-	$(TARGET)/test_jccbasic_version.o \
-	$(TARGET)/test_ltrim.o \
-	$(TARGET)/test_rtrim.o \
-	$(TARGET)/test_sgn.o
+	$(BIN)/test_fix.o \
+	$(BIN)/test_jccbasic_version.o \
+	$(BIN)/test_ltrim.o \
+	$(BIN)/test_rtrim.o \
+	$(BIN)/test_sgn.o
 
 TEST_EXES=\
-	$(TARGET)/test_fix.exe \
-	$(TARGET)/test_jccbasic_version.exe \
-	$(TARGET)/test_ltrim.exe \
-	$(TARGET)/test_rtrim.exe \
-	$(TARGET)/test_sgn.exe
+	$(BIN)/test_fix.exe \
+	$(BIN)/test_jccbasic_version.exe \
+	$(BIN)/test_ltrim.exe \
+	$(BIN)/test_rtrim.exe \
+	$(BIN)/test_sgn.exe
 
 # -----------------------------------------------------------------------------
 
 .PHONY: all clean
 
-all: $(TARGET) $(DLL) $(TEST_EXES)
+all: $(BIN) $(DLL) $(TEST_EXES)
 
 clean:
-	-rm -rf $(TARGET)
+	-rm -rf $(BIN)
 
 # -----------------------------------------------------------------------------
 
-$(TARGET):
-	-mkdir $(TARGET)
+$(BIN):
+	-mkdir $(BIN)
 
-$(TARGET)/%.o: $(MAIN_SRC)/%.c $(HEADERS)
+$(BIN)/%.o: $(MAIN_SRC)/%.c $(HEADERS)
 	$(CC) -o $@ $(CC_FLAGS_MAIN) $<
 
 $(DLL): $(MAIN_OBJS)
@@ -72,10 +72,10 @@ $(DLL): $(MAIN_OBJS)
 
 # -----------------------------------------------------------------------------
 
-$(TARGET)/%.o: $(TEST_SRC)/%.c $(HEADERS) $(DLL)
+$(BIN)/%.o: $(TEST_SRC)/%.c $(HEADERS) $(DLL)
 	$(CC) -o $@ $(CC_FLAGS_TEST) $<
 
-$(TARGET)/%.exe: $(TARGET)/%.o
+$(BIN)/%.exe: $(BIN)/%.o
 	$(LD) -o $@ $(LD_FLAGS_LINK) $<
 
 # -----------------------------------------------------------------------------

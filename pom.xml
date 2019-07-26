@@ -50,7 +50,7 @@
         <filtering>false</filtering>
       </resource>
       <resource>
-        <directory>target</directory>
+        <directory>bin</directory>
         <targetPath>../lib</targetPath>
         <includes>
           <include>jccbasic.dll</include>
