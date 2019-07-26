@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-// Converts number to an integer by truncating the decimals.
+// Converts the given number to an integer by truncating the decimals.
 int64_t fix(double number);
 
 #endif /* FIX_H_ */

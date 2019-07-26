@@ -5,71 +5,77 @@ MAIN_SRC=main/src
 TEST_INC=test/inc
 TEST_SRC=test/src
 
-DLL_NAME=jccbasic
+TARGET=target
 
-DLL_DIR=target_dll
-EXE_DIR=target_exe
+DLL_NAME=jccbasic
+DLL=$(TARGET)/$(DLL_NAME).dll
 
 CC=gcc
-CC_FLAGS=-c -g -Wall
+CC_FLAGS_MAIN=-c -g -Wall -I$(MAIN_INC)
+CC_FLAGS_TEST=-c -g -Wall -I$(MAIN_INC) -I$(TEST_INC)
 
 LD=gcc
-LD_MAKE_FLAGS=-shared --enable-runtime-pseudo-reloc
-LD_LINK_FLAGS=-L$(DLL_DIR) -l$(DLL_NAME)
+LD_FLAGS_MAKE=-shared --enable-runtime-pseudo-reloc
+LD_FLAGS_LINK=-L$(TARGET) -l$(DLL_NAME)
 
 # -----------------------------------------------------------------------------
 
-DEPS=\
+HEADERS=\
 	$(MAIN_INC)/fix.h \
 	$(MAIN_INC)/jccbasic_version.h \
-	$(MAIN_INC)/sgn.h
+	$(MAIN_INC)/ltrim.h \
+	$(MAIN_INC)/rtrim.h \
+	$(MAIN_INC)/sgn.h \
+	\
+	$(TEST_INC)/assert.h
 
-DLL_OBJS=\
-	$(DLL_DIR)/fix.o \
-	$(DLL_DIR)/jccbasic_version.o \
-	$(DLL_DIR)/sgn.o
+MAIN_OBJS=\
+	$(TARGET)/fix.o \
+	$(TARGET)/jccbasic_version.o \
+	$(TARGET)/ltrim.o \
+	$(TARGET)/rtrim.o \
+	$(TARGET)/sgn.o
 
-DLL=$(DLL_DIR)/$(DLL_NAME).dll
+TEST_OBJS=\
+	$(TARGET)/test_fix.o \
+	$(TARGET)/test_jccbasic_version.o \
+	$(TARGET)/test_ltrim.o \
+	$(TARGET)/test_rtrim.o \
+	$(TARGET)/test_sgn.o
 
-EXE_OBJS=\
-	$(EXE_DIR)/test_fix.o \
-	$(EXE_DIR)/test_jccbasic_version.o \
-	$(EXE_DIR)/test_sgn.o
-
-EXE=\
-	$(EXE_DIR)/test_fix.exe \
-	$(EXE_DIR)/test_jccbasic_version.exe \
-	$(EXE_DIR)/test_sgn.exe
+TEST_EXES=\
+	$(TARGET)/test_fix.exe \
+	$(TARGET)/test_jccbasic_version.exe \
+	$(TARGET)/test_ltrim.exe \
+	$(TARGET)/test_rtrim.exe \
+	$(TARGET)/test_sgn.exe
 
 # -----------------------------------------------------------------------------
 
 .PHONY: all clean
 
-all: $(DLL_DIR) $(EXE_DIR) $(DLL) $(EXE)
+all: $(TARGET) $(DLL) $(TEST_EXES)
 
 clean:
-	-rm -rf $(DLL_DIR) $(EXE_DIR)
+	-rm -rf $(TARGET)
 
 # -----------------------------------------------------------------------------
 
-$(DLL_DIR):
-	-mkdir $(DLL_DIR)
+$(TARGET):
+	-mkdir $(TARGET)
 
-$(DLL_DIR)/%.o: $(MAIN_SRC)/%.c $(DEPS)
-	$(CC) -o $@ $(CC_FLAGS) -I$(MAIN_INC) $<
+$(TARGET)/%.o: $(MAIN_SRC)/%.c $(HEADERS)
+	$(CC) -o $@ $(CC_FLAGS_MAIN) $<
 
-$(DLL): $(DLL_OBJS)
-	$(LD) -o $@ $(LD_MAKE_FLAGS) $^
+$(DLL): $(MAIN_OBJS)
+	$(LD) -o $@ $(LD_FLAGS_MAKE) $^
 
 # -----------------------------------------------------------------------------
 
-$(EXE_DIR):
-	-mkdir $(EXE_DIR)
+$(TARGET)/%.o: $(TEST_SRC)/%.c $(HEADERS) $(DLL)
+	$(CC) -o $@ $(CC_FLAGS_TEST) $<
 
-$(EXE_DIR)/%.o: $(TEST_SRC)/%.c $(DEPS)
-	$(CC) -o $@ $(CC_FLAGS) -I$(MAIN_INC) -I$(TEST_INC) $<
-
-$(EXE_DIR)/%.exe: $(EXE_DIR)/%.o
-	$(LD) -o $@ $(LD_LINK_FLAGS) $<
+$(TARGET)/%.exe: $(TARGET)/%.o
+	$(LD) -o $@ $(LD_FLAGS_LINK) $<
 
 # -----------------------------------------------------------------------------
