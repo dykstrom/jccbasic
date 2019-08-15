@@ -15,12 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LTRIM_H_
-#define LTRIM_H_
+#include <inttypes.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-// Returns a copy of the given string, with leading whitespace removed.
-// This function allocates memory. It is the caller's responsibility to
-// free this memory.
-char* ltrim(const char* s);
+#include "oct.h"
 
-#endif /* LTRIM_H_ */
+char* oct$(int64_t number) {
+  int length = snprintf(0, 0, "%" PRIo64, number);
+  char *result = (char *) malloc(length + 1);
+  snprintf(result, length + 1, "%" PRIo64, number);
+  return result;
+}

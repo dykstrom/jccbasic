@@ -15,12 +15,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LTRIM_H_
-#define LTRIM_H_
+#include <stdlib.h>
+#include <string.h>
 
-// Returns a copy of the given string, with leading whitespace removed.
-// This function allocates memory. It is the caller's responsibility to
-// free this memory.
-char* ltrim(const char* s);
+#include "assert.h"
+#include "date_time.h"
 
-#endif /* LTRIM_H_ */
+int main(int argc, char *argv[]) {
+  char* actual = date$();
+  assert_equals_I64_I64(10, strlen(actual));
+  assert_true_Bool(actual[2] == '-');
+  assert_true_Bool(actual[5] == '-');
+  free(actual);
+
+  actual = time$();
+  assert_equals_I64_I64(8, strlen(actual));
+  assert_true_Bool(actual[2] == ':');
+  assert_true_Bool(actual[5] == ':');
+  free(actual);
+}

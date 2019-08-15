@@ -15,12 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LTRIM_H_
-#define LTRIM_H_
+#ifndef DATE_TIME_H_
+#define DATE_TIME_H_
 
-// Returns a copy of the given string, with leading whitespace removed.
-// This function allocates memory. It is the caller's responsibility to
-// free this memory.
-char* ltrim(const char* s);
+// Returns the current date as a string with format mm-dd-yyyy. This function
+// allocates memory. It is the caller's responsibility to free this memory.
+char* date$();
 
-#endif /* LTRIM_H_ */
+// Returns the current time as a string with format hh:mm:ss. This function
+// allocates memory. It is the caller's responsibility to free this memory.
+char* time$();
+
+#endif /* DATE_TIME_H_ */

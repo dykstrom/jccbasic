@@ -15,12 +15,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LTRIM_H_
-#define LTRIM_H_
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-// Returns a copy of the given string, with leading whitespace removed.
-// This function allocates memory. It is the caller's responsibility to
-// free this memory.
-char* ltrim(const char* s);
+#include "date_time.h"
 
-#endif /* LTRIM_H_ */
+char* date$() {
+  struct tm t;
+  _getsystime(&t);
+
+  int length = snprintf(0, 0, "%02d-%02d-%04d", t.tm_mon + 1, t.tm_mday, t.tm_year + 1900);
+  char *result = (char *) malloc(length + 1);
+  snprintf(result, length + 1, "%02d-%02d-%04d", t.tm_mon + 1, t.tm_mday, t.tm_year + 1900);
+  return result;
+}
+
+char* time$() {
+  struct tm t;
+  _getsystime(&t);
+
+  int length = snprintf(0, 0, "%02d:%02d:%02d", t.tm_hour, t.tm_min, t.tm_sec);
+  char *result = (char *) malloc(length + 1);
+  snprintf(result, length + 1, "%02d:%02d:%02d", t.tm_hour, t.tm_min, t.tm_sec);
+  return result;
+}

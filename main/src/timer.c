@@ -15,12 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LTRIM_H_
-#define LTRIM_H_
+#include <time.h>
 
-// Returns a copy of the given string, with leading whitespace removed.
-// This function allocates memory. It is the caller's responsibility to
-// free this memory.
-char* ltrim(const char* s);
+#include "timer.h"
 
-#endif /* LTRIM_H_ */
+double timer() {
+  struct tm t;
+  unsigned millis = _getsystime(&t);
+  return t.tm_hour * 60 * 60 + t.tm_min * 60 + t.tm_sec + millis / 1000.0;
+}

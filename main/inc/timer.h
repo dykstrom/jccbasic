@@ -15,12 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LTRIM_H_
-#define LTRIM_H_
+#ifndef TIMER_H_
+#define TIMER_H_
 
-// Returns a copy of the given string, with leading whitespace removed.
-// This function allocates memory. It is the caller's responsibility to
-// free this memory.
-char* ltrim(const char* s);
+// Returns the number of seconds since midnight.
+// The decimals represent milliseconds.
+double timer();
 
-#endif /* LTRIM_H_ */
+#endif /* TIMER_H_ */

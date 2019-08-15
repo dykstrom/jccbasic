@@ -15,12 +15,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LTRIM_H_
-#define LTRIM_H_
+#include <stdlib.h>
 
-// Returns a copy of the given string, with leading whitespace removed.
-// This function allocates memory. It is the caller's responsibility to
-// free this memory.
-char* ltrim(const char* s);
+#include "assert.h"
+#include "hex.h"
 
-#endif /* LTRIM_H_ */
+int main(int argc, char *argv[]) {
+  char* actual;
+
+  actual = hex$(0);
+  assert_equals_Str_Str("0", actual);
+  free(actual);
+
+  actual = hex$(10);
+  assert_equals_Str_Str("A", actual);
+  free(actual);
+
+  actual = hex$(255);
+  assert_equals_Str_Str("FF", actual);
+  free(actual);
+
+  actual = hex$(-1);
+  assert_equals_Str_Str("FFFFFFFFFFFFFFFF", actual);
+  free(actual);
+
+  actual = hex$(123456789);
+  assert_equals_Str_Str("75BCD15", actual);
+  free(actual);
+}
