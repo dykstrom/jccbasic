@@ -27,6 +27,7 @@ HEADERS=\
 	$(MAIN_INC)/jccbasic_version.h \
 	$(MAIN_INC)/ltrim.h \
 	$(MAIN_INC)/oct.h \
+	$(MAIN_INC)/randomize_rnd.h \
 	$(MAIN_INC)/rtrim.h \
 	$(MAIN_INC)/sgn.h \
 	$(MAIN_INC)/str.h \
@@ -41,6 +42,7 @@ MAIN_OBJS=\
 	$(BIN)/jccbasic_version.o \
 	$(BIN)/ltrim.o \
 	$(BIN)/oct.o \
+	$(BIN)/randomize_rnd.o \
 	$(BIN)/rtrim.o \
 	$(BIN)/sgn.o \
 	$(BIN)/str.o \
@@ -53,6 +55,7 @@ TEST_OBJS=\
 	$(BIN)/test_jccbasic_version.o \
 	$(BIN)/test_ltrim.o \
 	$(BIN)/test_oct.o \
+	$(BIN)/test_randomize_rnd.o \
 	$(BIN)/test_rtrim.o \
 	$(BIN)/test_sgn.o \
 	$(BIN)/test_str.o \
@@ -65,6 +68,7 @@ TEST_EXES=\
 	$(BIN)/test_jccbasic_version.exe \
 	$(BIN)/test_ltrim.exe \
 	$(BIN)/test_oct.exe \
+	$(BIN)/test_randomize_rnd.exe \
 	$(BIN)/test_rtrim.exe \
 	$(BIN)/test_sgn.exe \
 	$(BIN)/test_str.exe \

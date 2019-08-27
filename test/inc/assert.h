@@ -26,6 +26,30 @@
 
 // These functions should be macros...
 
+void assert_equals_F64_F64(double expected, double actual) {
+  if (expected == actual) {
+    printf("OK\n");
+  } else {
+    printf("FAIL: expected: %f, but was: %f\n", expected, actual);
+  }
+}
+
+void assert_equals_F64_F64_F64(double expected, double actual, double delta) {
+  if ((actual > expected - delta) && (actual < expected + delta)) {
+    printf("OK\n");
+  } else {
+    printf("FAIL: expected: %f +/- %f, but was: %f\n", expected, delta, actual);
+  }
+}
+
+void assert_not_equals_F64_F64(double unexpected, double actual) {
+  if (unexpected != actual) {
+    printf("OK\n");
+  } else {
+    printf("FAIL: expected difference, but was: %f\n", unexpected);
+  }
+}
+
 void assert_equals_I64_I64(int64_t expected, int64_t actual) {
   if (expected == actual) {
     printf("OK\n");
@@ -40,6 +64,26 @@ void assert_equals_Str_Str(const char* expected, const char* actual) {
   } else {
     printf("FAIL: expected: '%s', but was: '%s'\n", expected, actual);
   }
+}
+
+void assert_array_equals_F64_F64(double expected[], double actual[], int length) {
+  for (int i = 0; i < length; i++) {
+    if (expected[i] != actual[i]) {
+      printf("FAIL: at index %d, expected: %f, but was: %f\n", i, expected[i], actual[i]);
+      return;
+    }
+  }
+  printf("OK\n");
+}
+
+void assert_array_not_equals_F64_F64(double unexpected[], double actual[], int length) {
+  for (int i = 0; i < length; i++) {
+    if (unexpected[i] != actual[i]) {
+      printf("OK\n");
+      return;
+    }
+  }
+  printf("FAIL: expected difference, but all %d elements were equal\n", length);
 }
 
 void assert_true_Bool(bool actual) {
