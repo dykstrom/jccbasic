@@ -23,7 +23,11 @@
 static double last_number = 0.0;
 
 void randomize(double seed) {
-  srand(abs(seed * 1000));
+  // Add 32768 to get a better range from interactive seed
+  seed += 32768;
+  // Multiply by 1000 to get a better range from timer seed
+  seed *= 1000;
+  srand(abs(seed));
 }
 
 double rnd() {
