@@ -1,18 +1,20 @@
 #!/bin/sh
 
-dir=bin
+# shellcheck disable=SC2039
 
-if [ -d $dir ]; then
-    pushd $dir > /dev/null
+DIR=bin
+
+if [ -d $DIR ]; then
+    pushd $DIR > /dev/null || exit
     
-    files=`ls *.exe`
+    files=$(ls -- *.exe)
     for file in $files; do
-        echo $file
-        ./$file
+        echo "$file"
+        ./"$file"
     done
     
-    popd > /dev/null
+    popd > /dev/null || exit
 else
-    echo Directory \'$dir\' does not exist >&2
+    echo Directory \'$DIR\' does not exist >&2
     exit 1
 fi
