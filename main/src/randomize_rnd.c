@@ -40,7 +40,7 @@ double rnd_F64(double seed) {
   }
 
   if (seed != 0.0) {
-    last_number = (double) rand() / (RAND_MAX - 1);
+    last_number = (double) rand() / (RAND_MAX + 1);
   }
   
   return last_number;
