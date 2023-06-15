@@ -11,7 +11,7 @@ DLL_NAME=jccbasic
 DLL=$(BIN)/$(DLL_NAME).dll
 
 CC=gcc
-CC_FLAGS_MAIN=-c -g -Wall -I$(MAIN_INC)
+CC_FLAGS_MAIN=-save-temps -c -g -Wall -I$(MAIN_INC)
 CC_FLAGS_TEST=-c -g -Wall -I$(MAIN_INC) -I$(TEST_INC)
 
 LD=gcc
@@ -21,9 +21,13 @@ LD_FLAGS_LINK=-L$(BIN) -l$(DLL_NAME)
 # -----------------------------------------------------------------------------
 
 HEADERS=\
+	$(MAIN_INC)/asc.h \
+	$(MAIN_INC)/cint.h \
+	$(MAIN_INC)/cdbl.h \
 	$(MAIN_INC)/date_time.h \
 	$(MAIN_INC)/fix.h \
 	$(MAIN_INC)/hex.h \
+	$(MAIN_INC)/int.h \
 	$(MAIN_INC)/jccbasic_version.h \
 	$(MAIN_INC)/ltrim.h \
 	$(MAIN_INC)/oct.h \
@@ -36,9 +40,13 @@ HEADERS=\
 	$(TEST_INC)/assert.h
 
 MAIN_OBJS=\
+	$(BIN)/asc.o \
+	$(BIN)/cint.o \
+	$(BIN)/cdbl.o \
 	$(BIN)/date_time.o \
 	$(BIN)/fix.o \
 	$(BIN)/hex.o \
+	$(BIN)/int.o \
 	$(BIN)/jccbasic_version.o \
 	$(BIN)/ltrim.o \
 	$(BIN)/oct.o \
@@ -49,9 +57,13 @@ MAIN_OBJS=\
 	$(BIN)/timer.o
 
 TEST_OBJS=\
+	$(BIN)/test_asc.o \
+	$(BIN)/test_cint.o \
+	$(BIN)/test_cdbl.o \
 	$(BIN)/test_date_time.o \
 	$(BIN)/test_fix.o \
 	$(BIN)/test_hex.o \
+	$(BIN)/test_int.o \
 	$(BIN)/test_jccbasic_version.o \
 	$(BIN)/test_ltrim.o \
 	$(BIN)/test_oct.o \
@@ -62,9 +74,13 @@ TEST_OBJS=\
 	$(BIN)/test_timer.o
 
 TEST_EXES=\
+	$(BIN)/test_asc.exe \
+	$(BIN)/test_cint.exe \
+	$(BIN)/test_cdbl.exe \
 	$(BIN)/test_date_time.exe \
 	$(BIN)/test_fix.exe \
 	$(BIN)/test_hex.exe \
+	$(BIN)/test_int.exe \
 	$(BIN)/test_jccbasic_version.exe \
 	$(BIN)/test_ltrim.exe \
 	$(BIN)/test_oct.exe \

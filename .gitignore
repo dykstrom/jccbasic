@@ -62,3 +62,6 @@ TAGS
 
 # IntelliJ
 .idea/
+
+# Make
+bin/
