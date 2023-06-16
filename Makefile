@@ -11,7 +11,7 @@ DLL_NAME=jccbasic
 DLL=$(BIN)/$(DLL_NAME).dll
 
 CC=gcc
-CC_FLAGS_MAIN=-save-temps -c -g -Wall -I$(MAIN_INC)
+CC_FLAGS_MAIN=-c -g -Wall -I$(MAIN_INC)
 CC_FLAGS_TEST=-c -g -Wall -I$(MAIN_INC) -I$(TEST_INC)
 
 LD=gcc
@@ -30,6 +30,8 @@ HEADERS=\
 	$(MAIN_INC)/int.h \
 	$(MAIN_INC)/jccbasic_version.h \
 	$(MAIN_INC)/ltrim.h \
+	$(MAIN_INC)/mkd_cvd.h \
+	$(MAIN_INC)/mki_cvi.h \
 	$(MAIN_INC)/oct.h \
 	$(MAIN_INC)/randomize_rnd.h \
 	$(MAIN_INC)/rtrim.h \
@@ -49,6 +51,8 @@ MAIN_OBJS=\
 	$(BIN)/int.o \
 	$(BIN)/jccbasic_version.o \
 	$(BIN)/ltrim.o \
+	$(BIN)/mkd_cvd.o \
+	$(BIN)/mki_cvi.o \
 	$(BIN)/oct.o \
 	$(BIN)/randomize_rnd.o \
 	$(BIN)/rtrim.o \
@@ -66,6 +70,8 @@ TEST_OBJS=\
 	$(BIN)/test_int.o \
 	$(BIN)/test_jccbasic_version.o \
 	$(BIN)/test_ltrim.o \
+	$(BIN)/test_mkd_cvd.o \
+	$(BIN)/test_mki_cvi.o \
 	$(BIN)/test_oct.o \
 	$(BIN)/test_randomize_rnd.o \
 	$(BIN)/test_rtrim.o \
@@ -83,6 +89,8 @@ TEST_EXES=\
 	$(BIN)/test_int.exe \
 	$(BIN)/test_jccbasic_version.exe \
 	$(BIN)/test_ltrim.exe \
+	$(BIN)/test_mkd_cvd.exe \
+	$(BIN)/test_mki_cvi.exe \
 	$(BIN)/test_oct.exe \
 	$(BIN)/test_randomize_rnd.exe \
 	$(BIN)/test_rtrim.exe \
