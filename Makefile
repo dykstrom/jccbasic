@@ -29,6 +29,7 @@ HEADERS=\
 	$(MAIN_INC)/hex.h \
 	$(MAIN_INC)/int.h \
 	$(MAIN_INC)/jccbasic_version.h \
+	$(MAIN_INC)/lbound_ubound.h \
 	$(MAIN_INC)/ltrim.h \
 	$(MAIN_INC)/mkd_cvd.h \
 	$(MAIN_INC)/mki_cvi.h \
@@ -50,6 +51,7 @@ MAIN_OBJS=\
 	$(BIN)/hex.o \
 	$(BIN)/int.o \
 	$(BIN)/jccbasic_version.o \
+	$(BIN)/lbound_ubound.o \
 	$(BIN)/ltrim.o \
 	$(BIN)/mkd_cvd.o \
 	$(BIN)/mki_cvi.o \
@@ -69,6 +71,7 @@ TEST_OBJS=\
 	$(BIN)/test_hex.o \
 	$(BIN)/test_int.o \
 	$(BIN)/test_jccbasic_version.o \
+	$(BIN)/test_lbound_ubound.o \
 	$(BIN)/test_ltrim.o \
 	$(BIN)/test_mkd_cvd.o \
 	$(BIN)/test_mki_cvi.o \
@@ -88,6 +91,7 @@ TEST_EXES=\
 	$(BIN)/test_hex.exe \
 	$(BIN)/test_int.exe \
 	$(BIN)/test_jccbasic_version.exe \
+	$(BIN)/test_lbound_ubound.exe \
 	$(BIN)/test_ltrim.exe \
 	$(BIN)/test_mkd_cvd.exe \
 	$(BIN)/test_mki_cvi.exe \
