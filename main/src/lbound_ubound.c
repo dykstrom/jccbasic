@@ -53,9 +53,11 @@ int64_t lbound_I64(const void* array, int64_t dimension) {
 
 int64_t ubound(const void* array) {
   const int64_t *i64_array = array;
-  // Index -2 looks strange, but we know the size of the first dimension
-  // is stored two 64-bit memory cells before the start of the array
-  return i64_array[-2];
+  // 1. Index -2 looks strange, but we know the size of the first dimension
+  //    is stored two 64-bit memory cells before the start of the array
+  // 2. Since the size of the dimension is stored in memory, we must subtract
+  //    one, because ubound return the upper bound (inclusive)
+  return i64_array[-2] - 1;
 }
 
 int64_t ubound_I64(const void* array, int64_t dimension) {
@@ -67,5 +69,5 @@ int64_t ubound_I64(const void* array, int64_t dimension) {
     exit(1);
   }
   
-  return i64_array[-dimension - 1];
+  return i64_array[-dimension - 1] - 1;
 }
