@@ -59,3 +59,9 @@ release.properties
 *~
 *.*~
 TAGS
+
+# IntelliJ
+.idea/
+
+# Make
+bin/

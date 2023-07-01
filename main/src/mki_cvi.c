@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Johan Dykstrom
+ * Copyright (C) 2023 Johan Dykstrom
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,32 +16,19 @@
  */
 
 #include <stdlib.h>
+#include <string.h>
 
-#include "randomize_rnd.h"
+#include "mki_cvi.h"
 
-// The last number returned
-static double last_number = 0.0;
-
-void randomize(double seed) {
-  // Add 32768 to get a better range from interactive seed
-  seed += 32768;
-  // Multiply by 1000 to get a better range from timer seed
-  seed *= 1000;
-  srand(abs(seed));
+char* mki$(int64_t number) {
+  char *result = (char *) malloc(9);
+  memcpy(result, &number, 8);
+  result[8] = 0;
+  return result;
 }
 
-double rnd() {
-  return rnd_F64(1.0);
-}
-
-double rnd_F64(double seed) {
-  if (seed < 0.0) {
-    randomize(seed);
-  }
-
-  if (seed != 0.0) {
-    last_number = (double) rand() / (RAND_MAX + 1);
-  }
-  
-  return last_number;
+int64_t cvi(const char* s) {
+  int64_t result;
+  memcpy(&result, s, 8);
+  return result;
 }

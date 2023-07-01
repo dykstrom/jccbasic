@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Johan Dykstrom
+ * Copyright (C) 2023 Johan Dykstrom
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,33 +15,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <stdlib.h>
+#ifndef MKI$_CVI_H_
+#define MKI$_CVI_H_
 
-#include "randomize_rnd.h"
+#include <stdint.h>
 
-// The last number returned
-static double last_number = 0.0;
+// Converts an integer to a two-byte (actually eight-byte) string.
+// Note that the returned string may contain null characters. For
+// example, the call mki$(0) will return a string that contains
+// eight null characters, followed by the ending null character.
+// This function allocates memory. It is the caller's responsibility
+// to free this memory.
+char* mki$(int64_t number);
 
-void randomize(double seed) {
-  // Add 32768 to get a better range from interactive seed
-  seed += 32768;
-  // Multiply by 1000 to get a better range from timer seed
-  seed *= 1000;
-  srand(abs(seed));
-}
+// Convert a string containing a numeric value to an integer.
+// This function is the inverse of mki$.
+int64_t cvi(const char* s);
 
-double rnd() {
-  return rnd_F64(1.0);
-}
-
-double rnd_F64(double seed) {
-  if (seed < 0.0) {
-    randomize(seed);
-  }
-
-  if (seed != 0.0) {
-    last_number = (double) rand() / (RAND_MAX + 1);
-  }
-  
-  return last_number;
-}
+#endif /* MKI$_CVI_H_ */

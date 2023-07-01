@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Johan Dykstrom
+ * Copyright (C) 2023 Johan Dykstrom
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,31 +17,18 @@
 
 #include <stdlib.h>
 
+#include "assert.h"
+#include "mkd_cvd.h"
 #include "randomize_rnd.h"
+#include "timer.h"
 
-// The last number returned
-static double last_number = 0.0;
+int main(int argc, char *argv[]) {
+  randomize(timer());
 
-void randomize(double seed) {
-  // Add 32768 to get a better range from interactive seed
-  seed += 32768;
-  // Multiply by 1000 to get a better range from timer seed
-  seed *= 1000;
-  srand(abs(seed));
-}
-
-double rnd() {
-  return rnd_F64(1.0);
-}
-
-double rnd_F64(double seed) {
-  if (seed < 0.0) {
-    randomize(seed);
+  for (int i = 0; i < 10; i++) {
+    double value = 1000.0 * rnd() * rnd() - 1000.0 * rnd() * rnd();
+    char *s = mkd$(value);
+    assert_equals_F64_F64_F64(value, cvd(s), 0.00001);
+    free(s);
   }
-
-  if (seed != 0.0) {
-    last_number = (double) rand() / (RAND_MAX + 1);
-  }
-  
-  return last_number;
 }
