@@ -17,7 +17,7 @@
 
 #include "jccbasic_version.h"
 
-static int64_t VERSION = 1003002;
+static int64_t VERSION = 1004000;
 
 int64_t jccbasic_version() {
   return VERSION;
