@@ -11,14 +11,15 @@ jccbasic.dll.
 
 ## Building
 
-To build the JCC Basic standard library, you need the 64-bit version of MinGW, 
+To build the JCC Basic standard library, you need the 64-bit version of MinGW,
 as well as some tools that are not normally part of Windows.
 
 
 ### mingw-w64
 
-The 64-bit version of MinGW can be downloaded from their home page:
-[mingw-w64](https://mingw-w64.org).
+The 64-bit version of MinGW can be downloaded from their home page
+[mingw-w64](https://mingw-w64.org) or as pre-built binaries from
+[MinGW-W64-binaries](https://github.com/niXman/mingw-builds-binaries).
 
 
 ### make

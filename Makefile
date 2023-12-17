@@ -27,6 +27,7 @@ HEADERS=\
 	$(MAIN_INC)/date_time.h \
 	$(MAIN_INC)/fix.h \
 	$(MAIN_INC)/hex.h \
+	$(MAIN_INC)/inkey.h \
 	$(MAIN_INC)/int.h \
 	$(MAIN_INC)/jccbasic_version.h \
 	$(MAIN_INC)/lbound_ubound.h \
@@ -37,6 +38,7 @@ HEADERS=\
 	$(MAIN_INC)/randomize_rnd.h \
 	$(MAIN_INC)/rtrim.h \
 	$(MAIN_INC)/sgn.h \
+	$(MAIN_INC)/sleep.h \
 	$(MAIN_INC)/str.h \
 	$(MAIN_INC)/timer.h \
 	\
@@ -49,6 +51,7 @@ MAIN_OBJS=\
 	$(BIN)/date_time.o \
 	$(BIN)/fix.o \
 	$(BIN)/hex.o \
+	$(BIN)/inkey.o \
 	$(BIN)/int.o \
 	$(BIN)/jccbasic_version.o \
 	$(BIN)/lbound_ubound.o \
@@ -59,28 +62,9 @@ MAIN_OBJS=\
 	$(BIN)/randomize_rnd.o \
 	$(BIN)/rtrim.o \
 	$(BIN)/sgn.o \
+	$(BIN)/sleep.o \
 	$(BIN)/str.o \
 	$(BIN)/timer.o
-
-TEST_OBJS=\
-	$(BIN)/test_asc.o \
-	$(BIN)/test_cint.o \
-	$(BIN)/test_cdbl.o \
-	$(BIN)/test_date_time.o \
-	$(BIN)/test_fix.o \
-	$(BIN)/test_hex.o \
-	$(BIN)/test_int.o \
-	$(BIN)/test_jccbasic_version.o \
-	$(BIN)/test_lbound_ubound.o \
-	$(BIN)/test_ltrim.o \
-	$(BIN)/test_mkd_cvd.o \
-	$(BIN)/test_mki_cvi.o \
-	$(BIN)/test_oct.o \
-	$(BIN)/test_randomize_rnd.o \
-	$(BIN)/test_rtrim.o \
-	$(BIN)/test_sgn.o \
-	$(BIN)/test_str.o \
-	$(BIN)/test_timer.o
 
 TEST_EXES=\
 	$(BIN)/test_asc.exe \
@@ -89,6 +73,7 @@ TEST_EXES=\
 	$(BIN)/test_date_time.exe \
 	$(BIN)/test_fix.exe \
 	$(BIN)/test_hex.exe \
+	$(BIN)/test_inkey.exe \
 	$(BIN)/test_int.exe \
 	$(BIN)/test_jccbasic_version.exe \
 	$(BIN)/test_lbound_ubound.exe \
@@ -99,6 +84,7 @@ TEST_EXES=\
 	$(BIN)/test_randomize_rnd.exe \
 	$(BIN)/test_rtrim.exe \
 	$(BIN)/test_sgn.exe \
+	$(BIN)/test_sleep.exe \
 	$(BIN)/test_str.exe \
 	$(BIN)/test_timer.exe
 
